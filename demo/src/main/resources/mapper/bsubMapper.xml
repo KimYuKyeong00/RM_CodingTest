@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.bsub.BsubMapper">
+	<select id="getBusinessCommodity" resultType="com.example.demo.bsub.BusinessCommodityList">
+		select * from BUSINESS_COMMODITY_LIST
+	</select>
+	
+	<select id="getBusinessCommodityById" parameterType="java.lang.String">
+		select * from BUSINESS_COMMODITY_LIST where commodity_id=#{commodity_id}
+	</select>
+	
+	<insert id="insertBusinessSubscribeOrder" parameterType="com.example.demo.bsub.BusinessSubscribeOrder">
+		insert into PRIVATE_SUBSCRIBE_ORDER values(bso_serial.nextval,#{pm_id},#{order_kind},sysdate,#{total_pay},#{number_of_emp},#{commodity},#{capacity},#{period})
+	</insert>
+	
+	<insert id="insertBusinessStorage">
+		insert into BUSINESS_STORAGE values(#{bm_id}, #{commodity_id}, #{expire_date} ,#{max_user}, #{max_storage}, #{storage_status})
+	</insert>
+	
+	<select id="getBM" resultType="com.example.demo.bm.BusinessMember" parameterType="com.example.demo.bm.BusinessMember">
+		select * from BUSINESS_MEMBER
+		where bm_id = #{bm_id}
+		and bm_pw = #{bm_pw}
+	</select>
+	
+	<select id="getBS" resultType="com.example.demo.bs.BusinessStorage" parameterType="com.example.demo.bm.BusinessMember">
+		select * from BUSINESS_STORAGE
+		where bm_id = #{bm_id}
+	</select>
+	
+	<update id="upgradeBS" parameterType="com.example.demo.bsub.BusinessSubscribeOrder">
+		update BUSINESS_STORAGE set commodity_id = #{commodity} where bm_id = #{bm_id}
+	</update>
+	
+	<update id="extenseBS" parameterType="com.example.demo.bs.BusinessStorage">
+		update BUSINESS_STORAGE set expire_date = #{expire_date} where bm_id = #{bm_id}
+	</update>
+	
+	<update id="addSubscriber" parameterType="java.lang.String">
+		update BUSINESS_COMMODITY_LIST set subscriber = subscriber+1 where commodity_id = #{commodity_id}
+	</update>
+	
+	<update id="drawSubscriber" parameterType="java.lang.String">
+		update BUSINESS_COMMODITY_LIST set subscriber = subscriber-1 where commodity_id = #{commodity_id}
+	</update>
+	
+	<update id="expandStorage" parameterType="com.example.demo.bs.BusinessStorage">
+		update BUSINESS_STORAGE set max_storage = #{max_storage} where bm_id=#{bm_id}
+	</update>
+	
+	
+</mapper>

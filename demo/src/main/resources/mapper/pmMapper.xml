@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.pm.PmMapper">
+	<insert id="insertPM" parameterType="com.example.demo.pm.PrivateMember">
+		insert into PRIVATE_MEMBER values(#{pm_id}, #{pm_pw}, #{pm_email}, sysdate, 0)
+	</insert>
+	
+	<select id="getPM" resultType="com.example.demo.pm.PrivateMember" parameterType="com.example.demo.pm.PrivateMember">
+		select * from PRIVATE_MEMBER
+		where pm_id = #{pm_id}
+		and pm_pw = #{pm_pw}
+	</select>
+</mapper>

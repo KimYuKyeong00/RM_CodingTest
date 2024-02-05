@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.ps.PsMapper">
+	<select id="getPS" parameterType="com.example.demo.pm.PrivateMember" resultType="com.example.demo.ps.PrivateStorage">
+		select * from PRIVATE_STORAGE where pm_id=#{pm_id}
+	</select>
+	
+	<insert id="insertPrivateFile" parameterType="com.example.demo.ps.PrivateFile">
+		insert into private_file_list values(pfl_serial.nextval,#{pm_id},#{file_name},#{file_extension},#{file_size},sysdate)
+	</insert>
+	
+	<update id="updatePrivateStorage" parameterType="com.example.demo.ps.PrivateStorage">
+		update private_storage set storage_status = #{storage_status} where pm_id = #{pm_id}
+	</update>
+	
+	<select id="getPF" parameterType="com.example.demo.pm.PrivateMember" resultType="com.example.demo.ps.PrivateFile">
+		select * from PRIVATE_FILE_LIST	where pm_id = #{pm_id}
+	</select>
+	
+	<select id="getPFBySerial" parameterType="int" resultType="com.example.demo.ps.PrivateFile">
+		select * from PRIVATE_FILE_LIST where private_file_serial=#{pfl_serial}
+	</select>
+
+</mapper>

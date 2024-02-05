@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.psub.PsubMapper">
+	<select id="getPrivateCommodity" resultType="com.example.demo.psub.PrivateCommodityList">
+		select * from PRIVATE_COMMODITY_LIST
+	</select>
+	
+	<select id="getPrivateCommodityById" parameterType="java.lang.String" resultType="com.example.demo.psub.PrivateCommodityList">
+		select * from PRIVATE_COMMODITY_LIST where commodity_id=#{commodity_id}
+	</select>
+	
+	<select id="countPrivateCommodity" resultType="java.lang.Integer">
+	 	select count(*) from PRIVATE_COMMODITY_LIST
+	</select>
+	
+	<insert id="insertPrivateSubscribeOrder" parameterType="com.example.demo.psub.PrivateSubscribeOrder">
+		insert into PRIVATE_SUBSCRIBE_ORDER values(pso_serial.nextval,#{pm_id},#{order_kind},sysdate,#{total_pay},#{commodity},#{capacity},#{period})
+	</insert>
+	
+	<insert id="insertPrivateStorage" parameterType="com.example.demo.ps.PrivateStorage">
+		insert into PRIVATE_STORAGE values(#{pm_id}, #{commodity_id}, #{expire_date} , #{max_storage}, #{storage_status})
+	</insert>
+	
+	<update id="updateSubscribeZero" parameterType="com.example.demo.pm.PrivateMember">
+		update PRIVATE_MEMBER set pm_subscribe=0 where pm_id = #{pm_id}
+	</update>
+	
+	<update id="updateSubscribeOne" parameterType="com.example.demo.pm.PrivateMember">
+		update PRIVATE_MEMBER set pm_subscribe=1 where pm_id = #{pm_id}
+	</update>
+	
+	<select id="getPM" resultType="com.example.demo.pm.PrivateMember" parameterType="com.example.demo.pm.PrivateMember">
+		select * from PRIVATE_MEMBER
+		where pm_id = #{pm_id}
+		and pm_pw = #{pm_pw}
+	</select>
+	
+	<select id="getPS" resultType="com.example.demo.ps.PrivateStorage" parameterType="com.example.demo.pm.PrivateMember">
+		select * from PRIVATE_STORAGE
+		where pm_id = #{pm_id}
+	</select>
+	
+	<update id="upgradePS" parameterType="com.example.demo.psub.PrivateSubscribeOrder">
+		update PRIVATE_STORAGE set commodity_id = #{commodity} where pm_id = #{pm_id}
+	</update>
+	
+	<update id="extensePS" parameterType="com.example.demo.ps.PrivateStorage">
+		update PRIVATE_STORAGE set expire_date = #{expire_date} where pm_id = #{pm_id}
+	</update>
+	
+	<update id="addSubscriber" parameterType="java.lang.String">
+		update PRIVATE_COMMODITY_LIST set subscriber = subscriber+1 where commodity_id = #{commodity_id}
+	</update>
+	
+	<update id="drawSubscriber" parameterType="java.lang.String">
+		update PRIVATE_COMMODITY_LIST set subscriber = subscriber-1 where commodity_id = #{commodity_id}
+	</update>
+	
+	<update id="expandStorage" parameterType="com.example.demo.ps.PrivateStorage">
+		update PRIVATE_STORAGE set max_storage = #{max_storage} where pm_id=#{pm_id}
+	</update>
+	
+</mapper>
