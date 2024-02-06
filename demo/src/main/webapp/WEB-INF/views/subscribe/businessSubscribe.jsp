@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="/resources/JS/jQuery.js"></script>
-<script type="text/javascript" src="/resources/JS/subscribe/privateSubscribe.js"></script>
+<script type="text/javascript" src="/resources/JS/subscribe/businessSubscribe.js"></script>
 </head>
 <body>
 <h1>기업 구독</h1>
@@ -36,7 +36,7 @@
 		</td>
 		<td>
 			사용인원(관리자 포함) :
-			<input id="countMember" name="countMember" form="businessSubscribeOrder">
+			<input id="countMember" name="countMember" form="businessSubscribeOrder" value="1">
 		</td>
 	</tr>
 	<tr>

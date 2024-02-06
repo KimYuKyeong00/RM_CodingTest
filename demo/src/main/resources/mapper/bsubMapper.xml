@@ -5,17 +5,26 @@
 		select * from BUSINESS_COMMODITY_LIST
 	</select>
 	
-	<select id="getBusinessCommodityById" parameterType="java.lang.String">
+	<select id="getBusinessCommodityById" parameterType="java.lang.String" resultType="com.example.demo.bsub.BusinessCommodityList">
 		select * from BUSINESS_COMMODITY_LIST where commodity_id=#{commodity_id}
 	</select>
 	
 	<insert id="insertBusinessSubscribeOrder" parameterType="com.example.demo.bsub.BusinessSubscribeOrder">
-		insert into PRIVATE_SUBSCRIBE_ORDER values(bso_serial.nextval,#{pm_id},#{order_kind},sysdate,#{total_pay},#{number_of_emp},#{commodity},#{capacity},#{period})
+		insert into BUSINESS_SUBSCRIBE_ORDER values(bso_serial.nextval,#{bm_id},#{order_kind},sysdate,#{total_pay},#{number_of_emp},#{commodity},#{capacity},#{period})
 	</insert>
 	
 	<insert id="insertBusinessStorage">
 		insert into BUSINESS_STORAGE values(#{bm_id}, #{commodity_id}, #{expire_date} ,#{max_user}, #{max_storage}, #{storage_status})
 	</insert>
+	
+	<update id="updateSubscribeZero">
+		update BUSINESS_MEMBER set bm_subscribe=0
+	</update>
+	
+	
+	<update id="updateSubscribeOne">
+		update BUSINESS_MEMBER set bm_subscribe=1
+	</update>
 	
 	<select id="getBM" resultType="com.example.demo.bm.BusinessMember" parameterType="com.example.demo.bm.BusinessMember">
 		select * from BUSINESS_MEMBER

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>기업 로그인</h1>
+<h1>기업 회원가입</h1>
 <form action="bm.signup" method="post">
 ID : <input name="bm_id"><p>
 PW : <input name="bm_pw" type="password"><p>
