@@ -14,5 +14,6 @@ public interface PsMapper {
 	abstract int updatePrivateStorage(PrivateStorage ps);
 	abstract List<PrivateFile> getPF(PrivateMember pm);
 	abstract List<PrivateFile> getPFBySerial(int pfl_serial);
+	abstract int deletePF(int pfl_serial);
 	
 }

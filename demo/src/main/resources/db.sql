@@ -1,5 +1,7 @@
 create sequence pso_serial;
 create sequence pfl_serial;
+create sequence bso_serial;
+create sequence bfl_serial;
 
 create table private_member(
 pm_id varchar2(20 char) primary key,
@@ -22,7 +24,7 @@ bm_subscribe number(1) not null
 create table business_emp(
 be_id varchar2(20 char) primary key,
 bm_id varchar2(20 char) not null,
-bm_name varchar2(50 char)not null,
+be_name varchar2(50 char)not null,
 be_pw varchar2(20 char) not null,
 be_email varchar2(20 char) not null,
 be_date date not null,
@@ -60,8 +62,8 @@ commodity_id varchar2(20 char) not null,
 expire_date date not null,
 max_storage number(20) not null,
 storage_status number(20)not null,
-constraint fk_id foreign key (pm_id) references private_member(pm_id) on delete cascade,
-constraint c_id foreign key (commodity_id) references private_commodity_list(commodity_id)
+constraint pfk_id foreign key (pm_id) references private_member(pm_id) on delete cascade,
+constraint pc_id foreign key (commodity_id) references private_commodity_list(commodity_id)
 );
 
 create table business_storage(
@@ -88,6 +90,19 @@ period varchar2(20 char) not null,
 constraint p_id foreign key (pm_id) references private_member(pm_id)
 );
 
+
+create table business_subscribe_order(
+order_serial number(5) primary key,
+bm_id varchar2(20 char)not null,
+order_kind varchar2(20 char)not null,
+order_date date not null,
+total_pay number(10) not null,
+number_of_emp number(5)not null,
+commodity varchar2(20 char) not null,
+capacity varchar2(20 char) not null,
+period varchar2(20 char) not null,
+constraint b_id foreign key (bm_id) references business_member(bm_id)
+);
 
 
 

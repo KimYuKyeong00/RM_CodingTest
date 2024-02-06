@@ -52,6 +52,12 @@
 					<button>다운로드</button>
 				</form>
 			</td>
+			<td>
+				<form action="ps.delete" method="post">
+				<input hidden="hidden" name="private_file_serial" value=${pf.getPrivate_file_serial() }>
+				<button>삭제</button>
+				</form>
+			</td>
 		</tr>
 	</c:forEach>
 </table>

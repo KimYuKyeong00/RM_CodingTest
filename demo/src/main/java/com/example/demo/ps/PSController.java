@@ -30,6 +30,7 @@ public class PSController {
 	@RequestMapping(value="/ps.upload", method=RequestMethod.POST)
 	public String uploadFile(HttpServletRequest req,@RequestParam("file")MultipartFile mf) {
 		pdao.uploadFile(req, mf);
+		pdao.getFileList(req);
 		req.setAttribute("subPage", "storage/pmStorage.jsp");
 		return "index";
 	}
@@ -39,10 +40,18 @@ public class PSController {
 	public String downloadFile(HttpServletRequest req, HttpServletResponse res) {
 		pdao.downloadFile(req,res);
 		pdao.getFileList(req);
-		req.setAttribute("subPage", "storage/pmStorage");
+		req.setAttribute("subPage", "storage/pmStorage.jsp");
 		return "index";
 	}
 	
+	
+	@RequestMapping(value="/ps.delete", method=RequestMethod.POST)
+	public String deleteFile(HttpServletRequest req) {
+		pdao.deleteFile(req);
+		pdao.getFileList(req);
+		req.setAttribute("subPage","storage/pmStorage.jsp");
+		return "index";
+	}
 
 	
 	

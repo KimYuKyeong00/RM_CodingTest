@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.bm.BmMapper">
 	<insert id="insertBM" parameterType="com.example.demo.bm.BusinessMember">
-		insert into BUSINESS_MEMBER values(#{bm_id}, #{bm_pw}, #{bm_email}, sysdate, 0)
+		insert into BUSINESS_MEMBER values(#{bm_id}, #{bm_pw}, #{bm_email}, sysdate, 0, 0)
 	</insert>
 	
 	<select id="getBM" resultType="com.example.demo.bm.BusinessMember" parameterType="com.example.demo.bm.BusinessMember">

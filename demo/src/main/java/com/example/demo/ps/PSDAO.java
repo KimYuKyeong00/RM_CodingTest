@@ -115,5 +115,21 @@ public class PSDAO {
 			e.getMessage();
 		}
 	}
+	
+	public void deleteFile(HttpServletRequest req) {
+		try {
+			PrivateMember pm = (PrivateMember) req.getSession().getAttribute("LoginMember");
+			String folderDir = pmFolderDir + "/" + pm.getId();
+			int pfl_serial = Integer.parseInt(req.getParameter("private_file_serial"));
+			PrivateFile pf = pMapper.getPFBySerial(pfl_serial).get(0);
+			Path filePath = Paths.get(folderDir).resolve(pf.getFile_name());
+			Files.deleteIfExists(filePath);
+			pMapper.deletePF(pfl_serial);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());		
+		}
+		
+
+	}
 
 }

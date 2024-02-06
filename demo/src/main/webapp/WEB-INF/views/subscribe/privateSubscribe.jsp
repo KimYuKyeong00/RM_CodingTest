@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>개인 구독</h1>
-<table>
+<table border="1">
 	<tr>
 		<td>
 			서비스 종류 :

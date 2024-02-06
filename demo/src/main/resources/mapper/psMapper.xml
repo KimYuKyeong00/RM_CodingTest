@@ -20,5 +20,9 @@
 	<select id="getPFBySerial" parameterType="int" resultType="com.example.demo.ps.PrivateFile">
 		select * from PRIVATE_FILE_LIST where private_file_serial=#{pfl_serial}
 	</select>
+	
+	<delete id="deletePF" parameterType="int">
+		delete from PRIVATE_FILE_LIST where private_file_serial=#{pfl_serial}
+	</delete>
 
 </mapper>
